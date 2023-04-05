@@ -10,6 +10,9 @@
 .header {
     background-color: v.$grisOscuro;
     padding: 1rem 0 3rem 0;
+    .logotipo {
+        height: 5rem;
+    }
     &.inicio {
         background-position: center center;
         background-size: cover;
@@ -21,6 +24,11 @@
             @include tablet {
                 min-height: 70rem;
             }
+            @include telefono {
+                h1 {
+                    text-align: left;
+                }
+            }
         }
     }
 }
@@ -31,7 +39,7 @@
     justify-content: space-between;
     
     h1 {
-        text-align: left;
+        text-align: center;
         color: $blanco;
         font-weight: $bold;
         max-width: 60rem;
