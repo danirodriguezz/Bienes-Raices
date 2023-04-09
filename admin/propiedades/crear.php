@@ -1,13 +1,10 @@
 <?php
-    declare(strict_types = 1);
     // Bases de Datos
     require "../../includes/config/database.php";
-    $db = conectarDB();
-    
+    $db = conectarDB();   
     //Consulta para obtener lo vendedores
     $consulta = "SELECT * FROM vendedores;";
     $resultado_consulta = mysqli_query($db, $consulta);
-
     // Arreglo con mensajes de errores
     $errores = [];
     $titulo = "";
@@ -17,21 +14,30 @@
     $wc = "";
     $estacionamiento = "";
     $vendedor_id = "";
-    $creado = date("Y/m/d");
     // Este codigo se ejecuta despues de que el usuario envie el formulario
     if($_SERVER["REQUEST_METHOD"] === "POST") {
-        $titulo = $_POST["titulo"];
-        $precio = $_POST["precio"];
-        $descripcion = $_POST["descripción"];
-        $habitaciones = $_POST["habitaciones"];
-        $wc = $_POST["wc"];
-        $estacionamiento = $_POST["estacionamientos"];
-        $vendedor_id = $_POST["vendedor"];
+        // var_dump($imagen["name"]);
+        // exit;
+        // echo "<pre>";
+        // var_dump($_POST);
+        // echo "</pre>";
+        // echo "<pre>";
+        // var_dump($_FILES);
+        // echo "</pre>";
+        $titulo = mysqli_real_escape_string( $db, $_POST["titulo"] );
+        $precio = mysqli_real_escape_string( $db, $_POST["precio"] );
+        $descripcion = mysqli_real_escape_string( $db, $_POST["descripción"] );
+        $habitaciones = mysqli_real_escape_string( $db, $_POST["habitaciones"] );
+        $wc = mysqli_real_escape_string( $db, $_POST["wc"] );
+        $estacionamiento = mysqli_real_escape_string( $db, $_POST["estacionamientos"] );
+        $vendedor_id = mysqli_real_escape_string( $db, $_POST["vendedor"] );
+        $creado = date("Y/m/d");
+        $imagen = $_FILES["imagen"];
         if(!$titulo) {
             $errores[] = "El titulo es obligatorio";
         }
-        if(!$precio) {
-            $errores[] = "El precio es obligatorio";
+        if(!$precio || $precio > 99999999 ) {
+            $errores[] = "El apartado de precio esta mal introducido";
         }
         if(strlen($descripcion) < 50) {
             $errores[] = "La descripción es obligatorio y debe tener al menos 50 caracteres";
@@ -48,13 +54,31 @@
         if(!$vendedor_id) {
             $errores[] = "Eliga un vendedor";
         }
+        if(!$imagen["name"]) {
+            $errores[] = "Es obligatorio las imagenes";
+        }
+        //Validar por tamaño de fotos(100Kb MAX)
+        $medida = 40000000;
+        if($imagen["size"] > $medida) {
+            $errores[] = "La imagen es muy pesada";
+        }
+
         if(empty($errores)) {
+            $carpetaImagenes = "../../imagenes/";
+            if(!is_dir($carpetaImagenes)) {
+                mkdir($carpetaImagenes);
+            }
+            //Generar un nombre unico
+            $nombreImagen = md5(uniqid(rand(), true)) . ".jpg";
+            //Subir la imagen
+            move_uploaded_file($imagen["tmp_name"], $carpetaImagenes . $nombreImagen);
             //  Insertar en la base de datos
-            $query = "INSERT INTO propiedades (vendedor_id, titulo, precio, descripcion, habitaciones, wc, estacionamiento, creado)
-            VALUES('$vendedor_id', '$titulo', '$precio', '$descripcion', '$habitaciones', '$wc', '$estacionamiento', '$creado');";
+            $query = "INSERT INTO propiedades (vendedor_id, titulo, precio, imagen, descripcion, habitaciones, wc, estacionamiento, creado)
+            VALUES('$vendedor_id', '$titulo', '$precio','$nombreImagen', '$descripcion', '$habitaciones', '$wc', '$estacionamiento', '$creado');";
             $resultado = mysqli_query($db, $query);
             if ($resultado) {
-                header("Location: /Bienes_raices/admin/index.php");
+                header("Location: http://localhost/Bienes_raices/admin?resultado=1");
+                exit();
             }
         }
     }
@@ -72,7 +96,7 @@
         </div>
         <?php endforeach;?>
         <!-- Fin Alerta Errores -->
-        <form class="formulario" method="POST" action="/Bienes_raices/admin/propiedades/crear.php">
+        <form class="formulario" method="POST" action="/Bienes_raices/admin/propiedades/crear.php" enctype="multipart/form-data">
             <fieldset>
                 <legend>Infomación General</legend>
 
@@ -83,7 +107,7 @@
                 <input type="number" id="precio" name="precio" placeholder="Precio Propiedad" value="<?php echo $precio; ?>">
                 
                 <label for="imagen">Imagen:</label>
-                <input type="file" id="imagen" accept="image/jpeg, image/png">
+                <input type="file" id="imagen" accept="image/jpeg, image/png" name="imagen">
 
                 <label for="descripcion">Descripción:</label>
                 <textarea id="descripcion" name="descripción"><?php echo $descripcion; ?></textarea>
