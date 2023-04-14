@@ -5,7 +5,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function eventListener() {
     const mobileMenu = document.querySelector(".mobile-menu");
-
     mobileMenu.addEventListener("click", function() {
         navegacionResponsive();
     });

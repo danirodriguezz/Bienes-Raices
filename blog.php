@@ -17,7 +17,7 @@
                     </picture>
                 </div>
                 <div class="texto-entrada">
-                    <a href="entrada.html">
+                    <a href="entrada.php">
                         <h4>Terraza en el techo de tu casa</h4>
                         <p>Escrito el: <span>20/10/2021</span> por: <span>Admin</span></p>
                         <p>Consejo para construir una terraza en el techo de tu casa con los mejores materiales y ahorrando dinero</p>
@@ -35,7 +35,7 @@
                     </picture>
                 </div>
                 <div class="texto-entrada">
-                    <a href="entrada.html">
+                    <a href="entrada.php">
                         <h4>Guía para la decoración de tu hogar</h4>
                         <p>Escrito el: <span>20/10/2021</span> por: <span>Admin</span></p>
                         <p>Maxímiza el espacio de tu hogar y aprende a usar los colores que mas favorezen para tu hogar</p>
@@ -53,7 +53,7 @@
                     </picture>
                 </div>
                 <div class="texto-entrada">
-                    <a href="entrada.html">
+                    <a href="entrada.php">
                         <h4>Guía para la decoración de tu hogar</h4>
                         <p>Escrito el: <span>20/10/2021</span> por: <span>Admin</span></p>
                         <p>Maxímiza el espacio de tu hogar y aprende a usar los colores que mas favorezen para tu hogar</p>
@@ -71,7 +71,7 @@
                     </picture>
                 </div>
                 <div class="texto-entrada">
-                    <a href="entrada.html">
+                    <a href="entrada.php">
                         <h4>Guía para la decoración de tu hogar</h4>
                         <p>Escrito el: <span>20/10/2021</span> por: <span>Admin</span></p>
                         <p>Maxímiza el espacio de tu hogar y aprende a usar los colores que mas favorezen para tu hogar</p>

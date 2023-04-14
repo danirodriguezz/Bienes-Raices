@@ -12,6 +12,31 @@
         background-color: $verde;
     }
 }
-
+table.propiedades {
+    margin: 4rem 0rem 0rem 0rem;
+    width: 100%;
+    border-spacing: 0;
+    thead {
+        background-color: $verde;
+        th {
+            color: $blanco;
+            padding: 2rem;
+        }
+    }
+    tbody {
+        td {
+            padding: 0 4%;
+        }
+        td:last-child {
+            padding: 0;
+        }
+    }
+    .imagen-tabla {
+        width: 10rem;
+    }
+}
+.imagen-small {
+    width: 40rem;
+}
 
 
