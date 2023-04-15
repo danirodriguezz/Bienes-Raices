@@ -11,6 +11,9 @@
     &.correcto {
         background-color: $verde;
     }
+    &.aviso {
+        background-color: $naranja;
+    }
 }
 table.propiedades {
     margin: 4rem 0rem 0rem 0rem;

@@ -9,6 +9,27 @@
     $resultado = mysqli_query($db, $query);
     //Muestra de mensaje adicional
     $mensaje = $_GET["resultado"] ?? null;
+
+    //Eliminar anuncio
+    if($_SERVER["REQUEST_METHOD"] === "POST") {
+        $id = $_POST["id"];
+        $id = filter_var($id, FILTER_VALIDATE_INT);
+        if($id) {
+            //Eliminar archivo
+            $query = "SELECT imagen FROM propiedades WHERE id = {$id};";
+            $resultado = mysqli_query($db, $query);
+            $propiedad = mysqli_fetch_assoc($resultado);
+            if($propiedad["imagen"]) {
+                unlink("../imagenes/" . $propiedad["imagen"]);
+            }
+            //Eliminar propiedad
+            $query = "DELETE FROM propiedades WHERE id = {$id};";
+            $resultado = mysqli_query($db, $query);
+            if($resultado) {
+                header("Location: /Bienes_raices/admin/?resultado=3");
+            }
+        }
+    }
     require "../includes/funciones.php";
     incluirTemplates("header");
 ?>
@@ -19,6 +40,8 @@
             <p class="alerta correcto">Anuncio creado correctamente</p>
         <?php elseif(intval($mensaje) === 2):?>
             <p class="alerta correcto">Anuncio actualizado correctamente</p>
+        <?php elseif(intval($mensaje) === 3):?>
+            <p class="alerta aviso">Anuncio eliminado correctamente</p>
         <?php endif; ?>
         <a href="/Bienes_raices/admin/propiedades/crear.php" class="boton boton-verde">Nueva Propiedad</a>
         <table class="propiedades">
@@ -39,7 +62,10 @@
                     <td><img src="../imagenes/<?php echo $propiedad["imagen"]; ?>" alt="Imagen de Propiedad" class="imagen-tabla"></td>
                     <td>$ <?php echo $propiedad["precio"]; ?></td>
                     <td>
-                        <a href="#" class="boton-rojo-block">Eliminar</a>
+                        <form method="POST">
+                            <input type="hidden" name="id" value="<?php echo $propiedad["id"]; ?>">
+                            <input type="submit" class="boton-rojo-block w-100" value="Eliminar">
+                        </form>
                         <a href="./propiedades/actualizar.php?id=<?php echo $propiedad["id"]; ?>" class="boton-amarillo">Actualizar</a>
                     </td>
                 </tr>
