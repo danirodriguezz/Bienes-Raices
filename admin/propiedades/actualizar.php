@@ -10,7 +10,7 @@
     // Bases de Datos
     require "../../includes/config/database.php";
     $db = conectarDB();   
-    //Consulta para obtener los datos de los vendedores
+    //Consulta para obtener los datos de la propiedad
     $consulta = "SELECT * FROM propiedades WHERE id = {$id};";
     $resultado = mysqli_query($db, $consulta);
     $propiedad = mysqli_fetch_assoc($resultado);
