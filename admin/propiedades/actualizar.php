@@ -1,4 +1,9 @@
 <?php
+    require "../../includes/funciones.php";
+    $auth = estaAuntenticado();
+    if(!$auth) {
+        header("Location: /Bienes_raices/");
+    }
     //Validar el id 
     $id = $_GET["id"];
     $id = filter_var($id, FILTER_VALIDATE_INT);
@@ -101,7 +106,6 @@
             }
         }
     }
-    require "../../includes/funciones.php";
     incluirTemplates("header");
 ?>
 

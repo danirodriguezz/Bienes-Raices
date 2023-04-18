@@ -4,6 +4,12 @@ CREATE DATABASE Bienes_Raices;
 
 USE Bienes_Raices;
 
+CREATE TABLE usuarios (
+    id INT(1) AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    email VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL
+);
+
 CREATE TABLE vendedores (
     id INT UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,
     nombre VARCHAR(255),

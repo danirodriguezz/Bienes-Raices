@@ -10,6 +10,10 @@
 .boton-rojo-block {
     @include boton($rojo, block);
 }
+.boton-rojo-margin0 {
+    @include boton($rojo, block);
+    margin-top: 0;
+}
 .boton-verde-block {
     @include boton($verde, block)
 }

@@ -1,4 +1,9 @@
 <?php
+    require "../../includes/funciones.php";
+    $auth = estaAuntenticado();
+    if(!$auth) {
+        header("Location: /Bienes_raices/");
+    }
     // Bases de Datos
     require "../../includes/config/database.php";
     $db = conectarDB();   
@@ -82,7 +87,6 @@
             }
         }
     }
-    require "../../includes/funciones.php";
     incluirTemplates("header");
 ?>
 

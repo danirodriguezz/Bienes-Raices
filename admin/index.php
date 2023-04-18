@@ -1,5 +1,10 @@
 <?php
     declare(strict_types = 1);
+    require "../includes/funciones.php";
+    $auth = estaAuntenticado();
+    if(!$auth) {
+        header("Location: /Bienes_raices/");
+    }
     //Importar la conexion
     require "../includes/config/database.php";
     $db = conectarDB();
@@ -30,7 +35,6 @@
             }
         }
     }
-    require "../includes/funciones.php";
     incluirTemplates("header");
 ?>
 
