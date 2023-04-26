@@ -9,6 +9,12 @@
     border: 1px solid darken($gris, 10);
     .contenido-anuncio {
         padding: 2rem;
+        .contenido-anuncio-descripcion {
+            max-height: 5.5em;
+            max-width: 46.6rem;
+            overflow: hidden;
+
+        }
     }
     h3, p {
         margin: 0;
