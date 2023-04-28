@@ -2,3 +2,5 @@ node_modules/
 src/img/
 imagenes/
 usuario.php
+
+/vendor/

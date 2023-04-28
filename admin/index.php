@@ -1,12 +1,10 @@
 <?php
     declare(strict_types = 1);
-    require "../includes/funciones.php";
-    $auth = estaAuntenticado();
-    if(!$auth) {
-        header("Location: /Bienes_raices/");
-    }
+    require "../includes/app.php";
+    
+    estaAuntenticado();
+    
     //Importar la conexion
-    require "../includes/config/database.php";
     $db = conectarDB();
     //Escribir el Query
     $query = "SELECT * FROM propiedades";

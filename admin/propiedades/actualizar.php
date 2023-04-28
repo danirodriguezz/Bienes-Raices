@@ -1,9 +1,8 @@
 <?php
-    require "../../includes/funciones.php";
-    $auth = estaAuntenticado();
-    if(!$auth) {
-        header("Location: /Bienes_raices/");
-    }
+    require "../../includes/app.php";
+    
+    estaAuntenticado();
+    
     //Validar el id 
     $id = $_GET["id"];
     $id = filter_var($id, FILTER_VALIDATE_INT);
@@ -13,7 +12,6 @@
     }
     
     // Bases de Datos
-    require "../../includes/config/database.php";
     $db = conectarDB();   
     //Consulta para obtener los datos de la propiedad
     $consulta = "SELECT * FROM propiedades WHERE id = {$id};";

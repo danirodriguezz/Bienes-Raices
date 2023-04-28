@@ -1,6 +1,6 @@
 <?php
     declare(strict_types = 1);
-    require "includes/config/database.php";
+    require "includes/app.php";
     $db = conectarDB();
     $error = "";
     if($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -43,7 +43,6 @@
         }
     }
     
-    require "includes/funciones.php";
     incluirTemplates("header");
 ?>
 

@@ -7,7 +7,7 @@
         exit;
     }
     //Base de datos
-    require "includes/config/database.php";
+    require "includes/app.php";
     $db = conectarDB();
     //Consulta a la base de datos
     $query = "SELECT * FROM propiedades WHERE id = {$id};";
@@ -19,7 +19,6 @@
     // echo "<pre>";
     // var_dump($propiedad);
     // echo "</pre>";
-    require "includes/funciones.php";
     incluirTemplates("header");
 ?>
 
