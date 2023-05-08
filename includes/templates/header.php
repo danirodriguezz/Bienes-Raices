@@ -30,6 +30,7 @@
                     <a href="/Bienes_raices/contacto.php">Contacto</a>
                     <?php if($auth): ?>
                         <a href="/Bienes_raices/cerrar-sesion.php" class="boton-rojo-margin0">Cerrar sesión</a>
+                        <a href="/Bienes_raices/admin/" class="boton-verde-margin0">Administrar</a>
                     <?php endif ?>
                 </nav>
             </div> <!-- barra -->

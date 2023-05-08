@@ -1,6 +1,5 @@
 node_modules/
-src/img/
-imagenes/
+src/img/*
+imagenes/*
 usuario.php
-
-/vendor/
+vendor/
