@@ -28,3 +28,28 @@ function sanitizar($html) : string {
     $sanitizado = htmlspecialchars($html);
     return $sanitizado; 
 }
+
+//Validar tipo de Contenido
+function validarTipoContenido($tipo) {
+    $tipos = ["vendedor", "propiedad"];
+    return in_array($tipo, $tipos);
+}
+
+function mostrarNotificacion($codigo) {
+    $mensaje = "";
+    switch($codigo) {
+        case 1:
+            $mensaje = "Creado correctamente";
+            break;
+        case 2:
+            $mensaje = "Actualizado correctamente";
+            break;
+        case 3:
+            $mensaje = "Eliminado correctamente";
+            break;
+        default:
+            $mensaje = false;
+            break;
+    }
+    return $mensaje;
+}

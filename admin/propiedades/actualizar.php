@@ -1,11 +1,10 @@
 <?php
-    use App\Propiedad;
-    use Intervention\Image\ImageManagerStatic as Image;
-
     require "../../includes/app.php";
-    
+    use App\Propiedad;
+    use App\Vendedor;
+    use Intervention\Image\ImageManagerStatic as Image;
     estaAuntenticado();
-    
+
     //Validar el id 
     $id = $_GET["id"];
     $id = filter_var($id, FILTER_VALIDATE_INT);
@@ -16,11 +15,8 @@
 
     //Consulta para obtener los datos de la propiedad
     $propiedad = Propiedad::find($id);
-
     //Consulta para obtener lo vendedores
-    $consulta = "SELECT * FROM vendedores";
-    $resultado_consulta = mysqli_query($db, $consulta);
-    
+    $vendedores = Vendedor::all();
     // Arreglo con mensajes de errores
     $errores = Propiedad::getErrores();
 
@@ -32,7 +28,6 @@
         $propiedad->sincronizar($args);
         //Validando errores
         $errores = $propiedad->validarErrores();
-        
         //Generar un nombre unico
         $nombreImagen = md5(uniqid(rand(), true)) . ".jpg";
 
@@ -43,7 +38,6 @@
             $propiedad->setImagen($nombreImagen);
         }
 
-        
         if(empty($errores)) {
             if($_FILES["propiedad"]["tmp_name"]["imagen"]) {
                 //Almacenamos la imagen 
@@ -66,12 +60,9 @@
         </div>
         <?php endforeach;?>
         <!-- Fin Alerta Errores -->
-
         <!-- Inicio del Formulario -->
         <form class="formulario" method="POST"  enctype="multipart/form-data">
-            
             <?php include "../../includes/templates/formulario_propiedades.php" ?>
-
             <input type="submit" value="Actualizar Propiedad" class="boton boton-verde">
         </form>
         <!-- Fin del Formulario -->
