@@ -3,6 +3,9 @@
         @include grid(3, 2rem)
     }
 }
+.resumen-propiedad {
+    max-width: 85rem;
+}
 .anuncio {
     margin-top: 2rem;
     background-color: lighten($gris, 5);

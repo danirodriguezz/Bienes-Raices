@@ -126,11 +126,22 @@ class ActiveRecord {
         return $resultado;
     }
 
+    //Listar una cantidad especifica de registros
+    public static function get($limite) {
+        $query = "SELECT * FROM " . static::$tabla . " LIMIT {$limite}";
+        $resultado = self::consultarSQL($query);
+        return $resultado;
+    }
+
     //Buscar un registro por su id 
     public static function find($id) : object{
         $query = "SELECT * FROM ". static::$tabla . " WHERE id = {$id};";
         $resultado = self::consultarSQL($query);
-        return array_shift($resultado) ;
+        if(empty($resultado)) {
+            header("Location: /Bienes_raices/");
+        } else {
+            return array_shift($resultado) ;
+        }
     }
 
     public static function consultarSQL($query) :array {
